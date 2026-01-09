@@ -9,10 +9,8 @@ type PortfolioContextType = {
 
 const AppContext = createContext<PortfolioContextType | undefined>(undefined)
 
-
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [currentProjectType, setCurrentProjectType] = useState('light')
-
+  const [currentProjectType, setCurrentProjectType] = useState('')
   return (
     <AppContext.Provider value={{ currentProjectType, setCurrentProjectType }}>
       {children}
