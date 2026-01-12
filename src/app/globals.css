@@ -36,3 +36,17 @@ body {
     background-color: var(--div-transparent);
   }
 }
+
+@layer base {
+  .layout-background {
+    @apply bg-[#f9f9f9];
+  }
+
+  .layout-dark-shift {
+    @apply bg-[#444444] transition-all duration-300;
+  }
+
+  .layout-light-shift {
+    @apply bg-[#f9f9f9] transition-all duration-300;
+  }
+}

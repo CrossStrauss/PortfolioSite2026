@@ -1,18 +1,23 @@
 'use client'
 
-import { createContext, useContext, useState, ReactNode } from 'react'
+import { createContext, useContext, useState, ReactNode, Dispatch, SetStateAction  } from 'react'
+import { viewModesType } from '../types/viewModes';
 
 type PortfolioContextType = {
   currentProjectType: string,
-  setCurrentProjectType: (type: string) => void
+  setCurrentProjectType: (type: string) => void,
+  viewMode: viewModesType,
+  setViewMode:  Dispatch<SetStateAction<viewModesType>>
 }
 
 const AppContext = createContext<PortfolioContextType | undefined>(undefined)
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [currentProjectType, setCurrentProjectType] = useState('')
+  const [viewMode, setViewMode] = useState<viewModesType>(viewModesType.lightMode)
+
   return (
-    <AppContext.Provider value={{ currentProjectType, setCurrentProjectType }}>
+    <AppContext.Provider value={{ currentProjectType, setCurrentProjectType, viewMode, setViewMode }}>
       {children}
     </AppContext.Provider>
   )
