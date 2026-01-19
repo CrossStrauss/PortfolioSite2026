@@ -93,18 +93,16 @@ export default function ThreeScene() {
     }, [viewMode])
 
     return (
-        <div className={`absolute w-full h-full top-0 left-0 z-1 ${viewModeClass}`}>
-            <div className={"w-[100vw] h-[100vh]"}>
-                <Canvas camera={{ position: [3, 20, 30] }}>
-                    <Environment preset="studio" />
-                    <ambientLight intensity={1} />
-                    <directionalLight
-                        position={[10, 20, 10]}
-                        intensity={1.2}
-                    />
-                    <Knot viewMode={viewMode} />
-                </Canvas>
-            </div>
+        <div className={`w-full h-full top-0 left-0 z-1 ${viewModeClass}`}>
+            <Canvas camera={{ position: [3, 20, 30] }} className={"h-full"}>
+                <Environment preset="studio" />
+                <ambientLight intensity={1} />
+                <directionalLight
+                    position={[10, 20, 10]}
+                    intensity={1.2}
+                />
+                <Knot viewMode={viewMode} />
+            </Canvas>
         </div>
     )
 }
