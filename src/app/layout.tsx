@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AppProvider, useAppContext } from "./context/portfolioContext";
+import SideBar from "./components/sidebar";
+import ThreeScene from './components/ThreeScene'
+import ViewModeToggler from "./components/viewModeToggler";
+import Image from "next/image";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,10 +31,25 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} >
         <AppProvider>
-          <div className={'w-full h-[100vh] flex flex-col relative'}>
-            {children}
+          <div className="grid grid-cols-5">
+            <ViewModeToggler />
+            {/* <ThreeScene/> */}
+            <SideBar/>
+            <div className={'w-full h-[100vh] flex flex-col relative z-1 col-span-4'}>
+              {children}
+            </div>
           </div>
         </AppProvider>
+        <div className="fixed inset-0 -z-10">
+          <Image
+            src="/pattern-hexagon-background-abstract-geometric-wallpaper-with-cover-web-shape_29971-522.avif"
+            alt="Background"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+
       </body>
     </html>
   );
