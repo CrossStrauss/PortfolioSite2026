@@ -2,8 +2,7 @@
 
 import { useEffect } from 'react'
 import { useAppContext } from '../context/portfolioContext'
-import SidebarLink from './sidebar-link';
-import HexTile from './hex-tile';
+import HexGrid from './hex-grid';
 
 export default function Sidebar() { 
     const {currentProjectType, setCurrentProjectType} = useAppContext();
@@ -13,8 +12,8 @@ export default function Sidebar() {
     }, []);
 
     return (
-        <div className="w-full h-full p-3 flex ">
-            <HexTile size={38} />
+        <div className="w-full h-full p-3">
+            <HexGrid hexCount={5} hexSize={200} />
         </div>
     )
 }

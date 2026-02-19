@@ -31,9 +31,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} >
         <AppProvider>
-          <div className="grid grid-cols-5">
+          <div className="grid grid-cols-4">
             <ViewModeToggler />
-            {/* <ThreeScene/> */}
+            <ThreeScene/>
             <SideBar/>
             <div className={'w-full h-[100vh] flex flex-col relative z-1 col-span-4'}>
               {children}
