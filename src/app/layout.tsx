@@ -6,6 +6,7 @@ import SideBar from "./components/sidebar";
 import ThreeScene from './components/ThreeScene'
 import ViewModeToggler from "./components/viewModeToggler";
 import Image from "next/image";
+import WhatsAppMessenger from "./components/whatsapp_messager";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,9 +34,10 @@ export default function RootLayout({
         <AppProvider>
           <div className="grid grid-cols-4">
             <ViewModeToggler />
+            <WhatsAppMessenger />
             <ThreeScene/>
             <SideBar/>
-            <div className={'w-full h-[100vh] flex flex-col relative z-1 col-span-4'}>
+            <div className={'w-full flex flex-col relative z-1 col-span-4'}>
               {children}
             </div>
           </div>
