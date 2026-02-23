@@ -1,7 +1,7 @@
 'use client'
 
 import { Canvas, useFrame } from '@react-three/fiber'
-import { useMemo, useRef, useState, useEffect } from 'react'
+import { useMemo, useRef, useState, useEffect, Suspense } from 'react'
 import { Environment } from "@react-three/drei"
 import * as THREE from 'three'
 import { useAppContext } from '../context/portfolioContext'
@@ -95,13 +95,15 @@ export default function ThreeScene() {
     return (
         <div className={`w-full h-full top-0 left-0 z-1 absolute ${viewModeClass}`}>
             <Canvas camera={{ position: [3, 20, 30] }} className={"h-full"}>
-                <Environment preset="studio" />
-                <ambientLight intensity={1} />
-                <directionalLight
-                    position={[10, 20, 10]}
-                    intensity={1.2}
-                />
-                <Knot viewMode={viewMode} />
+                <Suspense fallback={null}>
+                    <Environment preset="studio" />
+                    <ambientLight intensity={1} />
+                    <directionalLight
+                        position={[10, 20, 10]}
+                        intensity={1.2}
+                    />
+                    <Knot viewMode={viewMode} />
+                </Suspense>
             </Canvas>
         </div>
     )
