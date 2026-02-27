@@ -14,7 +14,7 @@ export default function HexGrid({ hexCount, hexSize }: HexGridProps) {
     }
 
     return (
-        <div className="hex-grid p-10 relative z-3">
+        <div className="hex-grid p-10 relative z-1">
             {generateHexTiles(hexCount, hexSize)}
         </div>
     );

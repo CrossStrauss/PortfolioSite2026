@@ -93,7 +93,7 @@ export default function ThreeScene() {
     }, [viewMode])
 
     return (
-        <div className={`w-full h-full top-0 left-0 z-1 absolute ${viewModeClass}`}>
+        <div className={`w-full h-full top-0 left-0 absolute ${viewModeClass}`}>
             <Canvas camera={{ position: [3, 20, 30] }} className={"h-full"}>
                 <Suspense fallback={null}>
                     <Environment preset="studio" />
