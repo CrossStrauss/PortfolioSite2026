@@ -15,6 +15,24 @@
   --font-mono: var(--font-geist-mono);
 
   /* Custom Colours */
+  --color-overlay-custom: oklch(0.9194 0.0085 56.31);
+  --color-primary-custom: oklch(0.4766 0.0765 263.45);
+  --color-secondary-custom: oklch(0.212 0.0426 256.46);
+  --color-accent-custom: oklch(0.7248 0.1819 45.86);
+
+  /* Animations */
+  --animate-rotateOuter: rotate 2s linear infinite;
+  --animate-rotateMiddle: rotate 2.5s linear infinite reverse;
+  --animate-rotateInner: rotate 1.8s linear infinite;
+
+  @keyframes rotate {
+    0% {
+      transform: rotateZ(0deg);
+    }
+    100% {
+      transform: rotateZ(360deg)
+    }
+  }
 
 }
 
@@ -64,4 +82,5 @@ body {
   .triangle {
     clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
   }
+
 }
