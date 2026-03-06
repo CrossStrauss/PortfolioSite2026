@@ -3,9 +3,10 @@ import { useState, useEffect } from "react"
 type hexTileProps = {
     size: number;
     index: number;
+    innerItem: React.ReactNode;
 };
 
-export default function HexTile({ size, index }: hexTileProps) {
+export default function HexTile({ size, index, innerItem }: hexTileProps) {
     const [alternator, setAlternator] = useState(0);
 
     function flipFlop() {
@@ -22,9 +23,12 @@ export default function HexTile({ size, index }: hexTileProps) {
 
     return (
         <div style={{ width: size, height: size, transform: `translate(${alternator * (size*0.78)}px) translateY(${index * (size/2.2)}px)` }}
-             className={`size-${size} absolute bg-gray-900 hex flex items-center justify-center group`}>
-            <div className="w-[97%] h-[97%] group-hover:w-[94%] group-hover:h-[94%] cursor-pointer transition-all duration-100 bg-white hex">
-                {alternator}
+             className={`size-${size} absolute hex flex items-center justify-center group`}>
+            <div className="w-[97%] h-[97%] group-hover:w-[94%] group-hover:h-[94%] cursor-pointer 
+                            transition-all duration-100 hex bg-[rgba(11,25,44,0.6)] 
+                            rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[9.5px] 
+                            border border-[rgba(11,25,44,0.3)] flex justify-center items-center">
+                {innerItem}
             </div>
         </div>
     )
