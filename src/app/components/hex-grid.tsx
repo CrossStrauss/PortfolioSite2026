@@ -10,9 +10,9 @@ export default function HexGrid({ hexCount, hexSize }: HexGridProps) {
 
     const hexComponents: React.ReactNode[] = [];
     hexComponents.push(<ProfileIcon />);
-    hexComponents.push(<ProjectComp />);
-    hexComponents.push(<ProjectComp />);
-    hexComponents.push(<ProjectComp />);
+    hexComponents.push(<ProjectComp linkHref="/projects/mobile" />);
+    hexComponents.push(<ProjectComp linkHref="/projects/unreal" />);
+    hexComponents.push(<ProjectComp linkHref="/projects/webdev" />);
 
     function generateHexTiles(count: number, size: number) {
         return Array.from({ length: count }, (_, index) => {

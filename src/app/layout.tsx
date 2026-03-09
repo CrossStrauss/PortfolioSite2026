@@ -32,12 +32,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} >
         <AppProvider>
-          <div className="grid grid-cols-4">
+          <div className="grid grid-cols-4 h-screen w-full relative">
             <ViewModeToggler />
             <WhatsAppMessenger />
             <ThreeScene/>
             <SideBar/>
-            <div className={'w-full flex flex-col relative z-1 col-span-4'}>
+            <div className={'w-full flex flex-col relative z-1 col-span-3 p-10'}>
               {children}
             </div>
           </div>
