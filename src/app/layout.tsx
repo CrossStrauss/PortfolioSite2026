@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { AppProvider, useAppContext } from "./context/portfolioContext";
+import { AppProvider } from "./context/portfolioContext";
 import SideBar from "./components/sidebar";
 import ThreeScene from './components/ThreeScene'
 import ViewModeToggler from "./components/viewModeToggler";
@@ -36,6 +36,7 @@ export default function RootLayout({
             <ViewModeToggler />
             <WhatsAppMessenger />
             <ThreeScene/>
+            {/* <BlendrScene/> */}
             <SideBar/>
             <div className={'w-full flex flex-col relative z-1 col-span-3 p-10'}>
               {children}

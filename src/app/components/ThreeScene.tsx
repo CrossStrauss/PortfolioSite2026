@@ -1,110 +1,43 @@
 'use client'
 
-import { Canvas, useFrame } from '@react-three/fiber'
-import { useMemo, useRef, useState, useEffect, Suspense } from 'react'
-import { Environment } from "@react-three/drei"
-import * as THREE from 'three'
+import { Canvas } from '@react-three/fiber'
+import { Bounds, Environment, OrbitControls, useGLTF } from '@react-three/drei'
+import { Suspense, useMemo } from 'react'
 import { useAppContext } from '../context/portfolioContext'
-import { viewModesType } from '../types/viewModes';
+import { viewModesType } from '../types/viewModes'
 
-function Knot({ viewMode }: { viewMode: viewModesType }) {
+function GLBModel() {
+  const { scene } = useGLTF('/TestSceneNew.glb')
+  const model = useMemo(() => scene.clone(true), [scene])
 
-    const meshRef = useRef<THREE.Mesh>(null!)
-
-    console.log(viewMode);
-
-    useFrame((_, delta) => {
-        if (meshRef.current) {
-            meshRef.current.rotation.y += delta * 0.5
-            meshRef.current.rotation.x += delta * 0.3
-        }
-    })
-
-    const geometry = useMemo(
-        () => new THREE.TorusKnotGeometry(10, 4.2, 154, 20),
-        []
+  return (
+      <primitive
+        object={model}
+        position={[0, -2, 0]}
+        rotation={[0.01, 0.4, -0.0]}
+        scale={1.5}
+        />
     )
-
-    if (viewMode === viewModesType.darkMode) {
-        return (
-        <group ref={meshRef}>
-                <mesh geometry={geometry}>
-                    <meshStandardMaterial
-                        color={"#212724"}
-                        metalness={0.1}
-                        roughness={0.5}
-                        envMapIntensity={1.2}
-                        flatShading={true} />
-                </mesh>
-                <mesh geometry={geometry} scale={1.001}>
-                    <meshStandardMaterial
-                        wireframe
-                        color="white"
-                        roughness={1}
-                        envMapIntensity={1.2}
-                    />
-                </mesh>
-            </group>
-        )
-    } else {
-        return (
-        <group ref={meshRef}>
-                <mesh geometry={geometry}>
-                    <meshStandardMaterial
-                        color={"#486a7b"}
-                        metalness={0.1}
-                        roughness={0.5}
-                        envMapIntensity={1.2}
-                        flatShading={true} />
-                </mesh>
-                <mesh geometry={geometry} scale={1.001}>
-                    <meshStandardMaterial
-                        wireframe
-                        color="white"
-                        roughness={1}
-                        envMapIntensity={1.2}
-                    />
-                </mesh>
-            </group>
-        )
-    }
-
-    
 }
 
 export default function ThreeScene() {
+  const { viewMode } = useAppContext()
+  const viewModeClass =
+    viewMode === viewModesType.darkMode ? 'layout-dark-shift' : 'layout-light-shift'
 
-    const { viewMode } = useAppContext();
-    const [viewModeClass, setViewModeClass] = useState('layout-background');
-    const [hasChanged, setHasChanged] = useState(false);
-
-    useEffect(() => {
-        if (!hasChanged) return
-
-        if (viewMode === viewModesType.darkMode) {
-            setViewModeClass('layout-dark-shift');
-        } else {
-            setViewModeClass('layout-light-shift')
-        }
-    },[viewMode])
-
-    useEffect(() => {
-        if (!hasChanged) setHasChanged(true)
-    }, [viewMode])
-
-    return (
-        <div className={`w-full h-full top-0 left-0 absolute ${viewModeClass}`}>
-            <Canvas camera={{ position: [3, 20, 30] }} className={"h-full"}>
-                <Suspense fallback={null}>
-                    <Environment preset="studio" />
-                    <ambientLight intensity={1} />
-                    <directionalLight
-                        position={[10, 20, 10]}
-                        intensity={1.2}
-                    />
-                    <Knot viewMode={viewMode} />
-                </Suspense>
-            </Canvas>
-        </div>
-    )
+  return (
+    <div className={`w-full h-full top-0 left-0 absolute ${viewModeClass}`}>
+      <Canvas camera={{ position: [5, 5, 10], fov: 45 }} className="h-full">
+        <Suspense fallback={null}>
+          <Environment preset="studio" />
+          <ambientLight intensity={0.6} />
+          <directionalLight position={[10, 20, 10]} intensity={1.1} />
+          <GLBModel />
+          <OrbitControls makeDefault enableDamping />
+        </Suspense>
+      </Canvas>
+    </div>
+  )
 }
+
+useGLTF.preload('/TestSceneNew.glb')
