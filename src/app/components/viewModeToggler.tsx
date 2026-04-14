@@ -14,7 +14,7 @@ export default function ViewModeToggler() {
     };
 
     return (
-        <div className={'size-12 flex justify-center items-center absolute top-10 right-10'}>
+        <div className={'size-12 flex justify-center items-center absolute top-10 right-10 z-6'}>
             <div className='relative size-12 flex justify-center items-center'>
                 <div className={`flex relative justify-center items-center w-[85%] h-[85%] hex cursor-pointer z-1 transition-all duration-300 ${viewMode === viewModesType.darkMode ? 'bg-white overflow-hidden' : 'bg-orange-600 overflow-visible'}`}
                     onClick={()=> {

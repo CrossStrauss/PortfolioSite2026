@@ -22,7 +22,7 @@ export default function WhatsAppMessenger() {
     }
 
     return (
-        <div className="size-10 bg-gray-900 absolute bottom-20 right-10 z-1 hex flex justify-center items-center group cursor-pointer" onClick={sendTextMessage}>
+        <div className="size-10 bg-gray-900 absolute bottom-20 right-10 z-6 hex flex justify-center items-center group cursor-pointer" onClick={sendTextMessage}>
             <div className="hex inset-0 size-9 bg-green-600 group-hover:size-8 transition-all duration-100">
             </div>
         </div>

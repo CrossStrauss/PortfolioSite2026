@@ -4,6 +4,7 @@ import "./globals.css";
 import { AppProvider } from "./context/portfolioContext";
 import SideBar from "./components/sidebar";
 import ThreeScene from './components/ThreeScene'
+import BlendrScene from "./components/BlendrScene";
 import ViewModeToggler from "./components/viewModeToggler";
 import Image from "next/image";
 import WhatsAppMessenger from "./components/whatsapp_messager";
@@ -43,14 +44,14 @@ export default function RootLayout({
             </div>
           </div>
         </AppProvider>
-        <div className="fixed inset-0 -z-10">
-          <Image
+        <div className="fixed inset-0 -z-10 bg-gray-900">
+          {/* <Image
             src="/pattern-hexagon-background-abstract-geometric-wallpaper-with-cover-web-shape_29971-522.avif"
             alt="Background"
             fill
             className="object-cover"
             priority
-          />
+          /> */}
         </div>
 
       </body>
