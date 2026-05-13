@@ -3,11 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AppProvider } from "./context/portfolioContext";
 import SideBar from "./components/sidebar";
-import ThreeScene from './components/ThreeScene'
-import BlendrScene from "./components/BlendrScene";
 import ViewModeToggler from "./components/viewModeToggler";
-import Image from "next/image";
 import WhatsAppMessenger from "./components/whatsapp_messager";
+import BackgroundGame from "./components/bg_game";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,8 +34,7 @@ export default function RootLayout({
           <div className="grid grid-cols-4 h-screen w-full relative">
             <ViewModeToggler />
             <WhatsAppMessenger />
-            <ThreeScene/>
-            {/* <BlendrScene/> */}
+            <BackgroundGame />
             <SideBar/>
             <div className={'w-full flex flex-col relative z-1 col-span-3 p-10'}>
               {children}
