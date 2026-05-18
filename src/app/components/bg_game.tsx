@@ -1,8 +1,46 @@
 "use client";
+import { useEffect, useRef, useState } from "react";
 
-import { useEffect, useRef } from "react";
+type GameObject = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  speed: number;
+};
 
 export default function ShooterGame() {
+
+  const [isTabActive, setIsTabActive] = useState(true);
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      const visible = !document.hidden;
+
+      setIsTabActive(visible);
+
+      if (visible) {
+        console.log("User returned to the tab");
+      } else {
+        console.log("User switched tabs");
+      }
+    };
+
+    document.addEventListener(
+      "visibilitychange",
+      handleVisibilityChange
+    );
+
+    return () => {
+      document.removeEventListener(
+        "visibilitychange",
+        handleVisibilityChange
+      );
+    };
+  }, []);
+
+  let bulletCooldown = 0;
+  
 
   // =====================================================
   // REFERENCE TO THE HTML CANVAS ELEMENT
@@ -39,6 +77,18 @@ export default function ShooterGame() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
+    const backgroundImage = new window.Image();
+    backgroundImage.src = "/game_background.png";
+
+    const playerImage = new window.Image();
+    playerImage.src = "/player.png";
+
+    const enemyImage = new window.Image();
+    enemyImage.src = "/asteroid.png";
+
+    const canDrawImage = (image: HTMLImageElement) =>
+      image.complete && image.naturalWidth > 0;
+
     // =====================================================
     // GAMEPLAY MARGINS
     // =====================================================
@@ -69,13 +119,13 @@ export default function ShooterGame() {
       x: canvas.width / 2,
 
       // Position player near bottom of screen
-      y: canvas.height - 80,
+      y: canvas.height - 180,
 
-      width: 40,
-      height: 40,
+      width: 150,
+      height: 150,
 
       // Movement speed per frame
-      speed: 4,
+      speed: 6,
     };
 
     // =====================================================
@@ -84,7 +134,7 @@ export default function ShooterGame() {
     // Every bullet fired gets pushed into this array.
     // =====================================================
 
-    const bullets: any[] = [];
+    const bullets: GameObject[] = [];
 
     // =====================================================
     // ENEMIES ARRAY
@@ -92,7 +142,7 @@ export default function ShooterGame() {
     // Stores all active enemies.
     // =====================================================
 
-    const enemies: any[] = [];
+    const enemies: GameObject[] = [];
 
     // =====================================================
     // KEYBOARD INPUT
@@ -154,17 +204,17 @@ export default function ShooterGame() {
           (
             canvas.width -
             GAME_MARGIN * 2 -
-            30
+            150
           ),
 
         // Spawn above screen
-        y: -40,
+        y: -150,
 
-        width: 30,
-        height: 30,
+        width: 150,
+        height: 150,
 
         // Random enemy speed
-        speed: 1 + Math.random() * 2,
+        speed: 1 + Math.random() * 0.5,
       });
     };
 
@@ -282,14 +332,21 @@ export default function ShooterGame() {
       // DRAW BACKGROUND
       // =====================================================
 
-      ctx.fillStyle = "black";
+      if (canDrawImage(backgroundImage)) {
+        ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+      } else {
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
 
-      ctx.fillRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-      );
+      // ctx.fillStyle = "black";
+
+      // ctx.fillRect(
+      //   0,
+      //   0,
+      //   canvas.width,
+      //   canvas.height
+      // );
 
       // =====================================================
       // DRAW PLAYER
@@ -297,12 +354,17 @@ export default function ShooterGame() {
 
       ctx.fillStyle = "lime";
 
-      ctx.fillRect(
-        player.x,
-        player.y,
-        player.width,
-        player.height
-      );
+      if (canDrawImage(playerImage)) {
+        ctx.drawImage(
+          playerImage,
+          player.x,
+          player.y,
+          player.width,
+          player.height
+        );
+      } else {
+        ctx.fillRect(player.x, player.y, player.width, player.height);
+      }
 
       // =====================================================
       // DRAW BULLETS
@@ -328,12 +390,17 @@ export default function ShooterGame() {
 
       enemies.forEach((enemy) => {
 
-        ctx.fillRect(
-          enemy.x,
-          enemy.y,
-          enemy.width,
-          enemy.height
-        );
+        if (canDrawImage(enemyImage)) {
+          ctx.drawImage(
+            enemyImage,
+            enemy.x,
+            enemy.y,
+            enemy.width,
+            enemy.height
+          );
+        } else {
+          ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+        }
       });
     };
 
@@ -343,17 +410,67 @@ export default function ShooterGame() {
     // Runs forever using requestAnimationFrame.
     // =====================================================
 
-    let animationFrameId: number;
+    // =====================================================
+    // AI TAKE OVER
+    // =====================================================
+    // The AI That runs when the ugame state is set to "notControlled"
+    // =====================================================
 
-    const gameLoop = () => {
+    const selctRandomEnemy = () => {
 
-      update();
-      draw();
+    }
 
-      animationFrameId =
-        requestAnimationFrame(gameLoop);
+    const AI_takeOver = () => {
+      if (!enemies[1]) return
+        if (bulletCooldown === 0) {
+          if (player.x < enemies[1].x) {
+            player.x +=  player.speed;
+          } else {
+            player.x -=  player.speed;
+          }
+        }
+
+      console.log(bulletCooldown);
+      if (bulletCooldown === 0) {
+
+        if (player.x  < (enemies[1].x + 3) && player.x  > (enemies[1].x - 3)) {
+          bulletCooldown = 100;
+          bullets.push({
+            x: player.x + player.width / 2 - 2,
+            y: player.y,
+            width: 4,
+            height: 10,
+            speed: 8,
+          });
+        }
+        ctx.fillStyle = "yellow";
+        bullets.forEach((bullet) => {
+          ctx.fillRect(
+            bullet.x,
+            bullet.y,
+            bullet.width,
+            bullet.height
+          );
+        });
+      } else {
+        bulletCooldown--;
+        if(bulletCooldown <= 0){
+          bulletCooldown = 0;
+        }
+      }
+
     };
 
+    let animationFrameId: number;
+      const gameLoop = () => {
+          update();
+          draw();
+          AI_takeOver();
+
+          animationFrameId =
+            requestAnimationFrame(gameLoop);
+      };
+    
     // Start game loop
     gameLoop();
 
