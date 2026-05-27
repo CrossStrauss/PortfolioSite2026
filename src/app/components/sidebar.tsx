@@ -13,7 +13,7 @@ export default function Sidebar() {
     }, []);
 
     return (
-        <div className="w-full h-full">
+        <div className="w-[5%] h-full">
             {/* <HexGrid hexCount={5} hexSize={200} /> */}
             < SideMenu />
         </div>

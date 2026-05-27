@@ -1,8 +1,7 @@
 export default function WebDevPage() {
   return (
-    <div>
-      <h1>Web Development Projects</h1>
-      <p>Here are some of my web development projects.</p>
+    <div className="w-full h-full flex justify-center items-center flex-col">
+      <h1 className="text-white">Web Development Projects</h1>
     </div>
   );
 }

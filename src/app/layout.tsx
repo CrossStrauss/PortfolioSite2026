@@ -31,12 +31,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} >
         <AppProvider>
-          <div className="grid grid-cols-4 h-screen w-full relative">
-            <ViewModeToggler />
-            <WhatsAppMessenger />
-            <BackgroundGame />
+          <div className="h-screen w-full relative flex flex-row">
+            {/* <ViewModeToggler /> */}
+            {/* <WhatsAppMessenger /> */}
+            {/* <BackgroundGame /> */}
             <SideBar/>
-            <div className={'w-full flex flex-col relative z-1 col-span-3 p-10'}>
+            <div className={'w-full flex flex-col relative z-1 col-span-3 p-10 w-[95%]'}>
               {children}
             </div>
           </div>

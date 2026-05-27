@@ -1,6 +1,6 @@
 export default function ProjectsLayout({ children }: { children: React.ReactNode }) {
     return (
-        <div>
+        <div className="grow">
             {children}
         </div>
     )

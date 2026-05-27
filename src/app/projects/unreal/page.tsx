@@ -1,7 +1,7 @@
 export default function UnrealPage() {
     return (
-        <div>
-            <h1>Unreal Projects</h1>
+        <div className="w-full h-full flex justify-center items-center flex-col">
+            <h1 className="text-white">Unreal Projects</h1>
         </div>
     )
 }
