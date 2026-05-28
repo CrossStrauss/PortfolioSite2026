@@ -1,7 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useContext } from 'react'
+import { useAppContext } from '../context/portfolioContext'
 
 export default function sideMenu() {
+    const {currentProjectType, setCurrentProjectType} = useAppContext();
+
+
     return (
         <div className="w-full transition-width duration-300 h-full bg-white z-1 relative bg-linear-to-t from-gray-900 to-gray-400 flex justify-center">
             <div className="w-[80%] h-full bg-gray-200 flex justify-between flex-col relative">
@@ -20,7 +25,9 @@ export default function sideMenu() {
 
                 <div className="w-full pt-10">
                     <div className="w-full flex flex-col gap-6 flex justify-end items-center pb-10">
-                        <Link href='/projects/webdev' className='w-[80%]'>
+                        <Link   href='/projects/webdev' 
+                                className='w-[70%]'
+                                onClick={() => setCurrentProjectType("webdev")}>
                             <div className="w-full aspect-square cursor-pointer hover:scale-[1.1] transition-scale duration-300 mt-3">
                                 <Image
                                     src="/logos/webDev.svg"
@@ -29,11 +36,11 @@ export default function sideMenu() {
                                     alt="Picture of the author"
                                     className='w-full'
                                 />
-                            
+
                             </div>
                         </Link>
 
-                        <Link href='/projects/unreal' className='w-[80%]'>
+                        <Link href='/projects/unreal' className='w-[70%]' onClick={() => setCurrentProjectType("unreal")}>
                             <div className="w-full aspect-square cursor-pointer hover:scale-[1.1] transition-scale duration-300 mt-3">
                                 <Image
                                     src="/logos/UnrealDev.svg"
@@ -45,7 +52,7 @@ export default function sideMenu() {
                             </div>
                         </Link>
                         
-                        <Link href='/projects/mobile' className='w-[80%]'>
+                        <Link href='/projects/mobile' className='w-[70%]' onClick={() => setCurrentProjectType("mobile")}>
                         <div className="w-full aspect-square cursor-pointer hover:scale-[1.1] transition-scale duration-300 mt-3">
                             <Image
                                 src="/logos/MobileDev.svg"

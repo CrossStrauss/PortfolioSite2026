@@ -6,14 +6,15 @@ import { viewModesType } from '../types/viewModes';
 type PortfolioContextType = {
   currentProjectType: string,
   setCurrentProjectType: (type: string) => void,
+
   viewMode: viewModesType,
-  setViewMode:  Dispatch<SetStateAction<viewModesType>>
+  setViewMode:  Dispatch<SetStateAction<viewModesType>>,
 }
 
 const AppContext = createContext<PortfolioContextType | undefined>(undefined)
 
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [currentProjectType, setCurrentProjectType] = useState('')
+  const [currentProjectType, setCurrentProjectType] = useState('webdev')
   const [viewMode, setViewMode] = useState<viewModesType>(viewModesType.lightMode)
 
   return (

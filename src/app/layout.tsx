@@ -3,9 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AppProvider } from "./context/portfolioContext";
 import SideBar from "./components/sidebar";
-import ViewModeToggler from "./components/viewModeToggler";
-import WhatsAppMessenger from "./components/whatsapp_messager";
-import BackgroundGame from "./components/bg_game";
+import DynamicBackground from "./components/dynamic-background";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,30 +25,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} >
         <AppProvider>
           <div className="h-screen w-full relative flex flex-row">
-            {/* <ViewModeToggler /> */}
-            {/* <WhatsAppMessenger /> */}
-            {/* <BackgroundGame /> */}
             <SideBar/>
             <div className={'w-full flex flex-col relative z-1 col-span-3 p-10 w-[95%]'}>
               {children}
             </div>
           </div>
+          <DynamicBackground/>
         </AppProvider>
-        <div className="fixed inset-0 -z-10 bg-gray-900">
-          {/* <Image
-            src="/pattern-hexagon-background-abstract-geometric-wallpaper-with-cover-web-shape_29971-522.avif"
-            alt="Background"
-            fill
-            className="object-cover"
-            priority
-          /> */}
-        </div>
-
       </body>
     </html>
   );
