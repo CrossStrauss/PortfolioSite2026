@@ -25,6 +25,19 @@ export default function sideMenu() {
 
                 <div className="w-full pt-10">
                     <div className="w-full flex flex-col gap-6 flex justify-end items-center pb-10">
+                        <Link   href='/' 
+                                className='w-[70%]'
+                                onClick={() => setCurrentProjectType("home")}>
+                            <div className="w-full aspect-square cursor-pointer hover:scale-[1.1] transition-scale duration-300 mt-3">
+                                <Image
+                                    src="/logos/webDev.svg"
+                                    width={200}
+                                    height={200}
+                                    alt="Picture of the author"
+                                    className='w-full'
+                                />
+                            </div>
+                        </Link>
                         <Link   href='/projects/webdev' 
                                 className='w-[70%]'
                                 onClick={() => setCurrentProjectType("webdev")}>
@@ -36,7 +49,6 @@ export default function sideMenu() {
                                     alt="Picture of the author"
                                     className='w-full'
                                 />
-
                             </div>
                         </Link>
 

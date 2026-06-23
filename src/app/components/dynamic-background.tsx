@@ -9,32 +9,36 @@ export default function DynamicBackground(){
 
     const {currentProjectType} = useAppContext();
 
-    const [bgCol, setBgCol] = useState('');
-    const [BgComponent, setBgComponent] = useState(() => BgGame);
+    const [BgComponent, setBgComponent] = useState(() => BgMobile);
 
     const InnerComp = "";
 
     useEffect(()=> {
+        
+        console.log('Current Project:' + currentProjectType);
+
         switch(currentProjectType){
-            case 'webdev': 
-                setBgCol('bg-red-500')
+            case 'home':
                 setBgComponent(() => BgWeb)
+                console.log("rendering webDev")
+            case 'webdev': 
+                setBgComponent(() => BgWeb)
+                console.log("rendering webDev")
             break
             case 'mobile':
-                setBgCol('bg-green-500')
                 setBgComponent(() => BgMobile)
+                console.log("rendering mobile")
             break
             case 'unreal':
-                setBgCol('bg-blue-500')
                 setBgComponent(() => BgGame)
+                console.log("rendering unreal");
     }
 
-    
 
     }, [currentProjectType]) 
 
     return (
-        <div className={`${bgCol} fixed inset-0 w-full h-full`}>
+        <div className={`fixed inset-0 w-full h-full`}>
             <BgComponent/>
         </div>
     )

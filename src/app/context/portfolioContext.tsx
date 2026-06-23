@@ -14,7 +14,7 @@ type PortfolioContextType = {
 const AppContext = createContext<PortfolioContextType | undefined>(undefined)
 
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [currentProjectType, setCurrentProjectType] = useState('webdev')
+  const [currentProjectType, setCurrentProjectType] = useState('home')
   const [viewMode, setViewMode] = useState<viewModesType>(viewModesType.lightMode)
 
   return (
